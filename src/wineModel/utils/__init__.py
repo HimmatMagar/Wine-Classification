@@ -1,6 +1,7 @@
 import os
 import yaml
 import json
+from typing import List
 from pathlib import Path
 from src.wineModel import logger
 from box.config_box import ConfigBox
@@ -13,8 +14,8 @@ def read_yaml(yaml_file_path:Path) -> ConfigBox:
       try:
             path = Path(yaml_file_path)
 
-            with open(path, 'r') as f:
-                  content = yaml.safe_load(path)
+            with open(path) as f:
+                  content = yaml.safe_load(f)
                   logger.info(f"yaml file: {yaml_file_path} is loaded successfully")
                   return ConfigBox(content)
       except BoxValueError:
@@ -24,11 +25,11 @@ def read_yaml(yaml_file_path:Path) -> ConfigBox:
 
 
 @ensure_annotations
-def create_directory(path: Path, verbos=True):
-      for path in path:
-            os.makedirs(path, exist_ok=True)
-            if verbos:
-                  logger.info(f"Directory is created at: {path}")
+def create_directory(file_path: List, verbose=True):
+      for file in file_path:
+            os.makedirs(file, exist_ok=True)
+            if verbose:
+                  logger.info(f"Directory is created at: {file}")
 
 @ensure_annotations
 def save_json(path: Path, data: dict):
