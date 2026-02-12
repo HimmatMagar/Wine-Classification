@@ -34,7 +34,6 @@ pip install -r requirements.txt
 
 
 ### Project Components
-- api: This folder for the FastAPI
 - artifacts: This folder is used for the data which are retrive from outsource like database, github
 - config: This folder is used for the configuration for data ingestion, data validation
 - research: This folder is used for research before writing moduler coding
@@ -47,6 +46,7 @@ pip install -r requirements.txt
 - src/constructor: Used to write a logs related file
 - tempalte: Used for forntend
 - main: Main end point for the pipeline
+- app: Used to write a api
 - Paras.yaml: Used to store the Model parameter
 - schema.yaml: Used to store the column name of the datasets
 - setup.py: Used to setup the project
