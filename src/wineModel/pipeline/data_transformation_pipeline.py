@@ -1,6 +1,6 @@
 from src.wineModel import logger
 from src.wineModel.components.data_transformation import DataTransformation
-from src.wineModel.config.configuration import ConfigurationManager
+from src.wineModel.config import ConfigurationManager
 
 
 STAGE_NAME = "Data Transformation stage"

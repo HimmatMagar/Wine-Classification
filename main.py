@@ -3,6 +3,7 @@ from src.wineModel.pipeline.data_ingestion_pipeline import DataIngestionTraining
 from src.wineModel.pipeline.data_validation_pipeline import DataValidationTrainingPipeline
 from src.wineModel.pipeline.data_transformation_pipeline import DataTransformationTrainingPipeline
 from src.wineModel.pipeline.model_training_pipeline import ModelTrainingPipeline
+from src.wineModel.pipeline.model_evaluation_pipeline import ModelEvaluationPipeline
 
 
 STAGE_NAME = "Data Ingestion stage"
@@ -42,6 +43,17 @@ STAGE_NAME = "Model Training stage"
 try:
       logger.info(f">>>>>> {STAGE_NAME} started <<<<<<")
       obj = ModelTrainingPipeline()
+      obj.main()
+      logger.info(f">>>>>> {STAGE_NAME} completed <<<<<<")
+except Exception as e:
+      logger.exception(e)
+      raise e
+
+
+STAGE_NAME = "Model Evaluation stage"
+try:
+      logger.info(f">>>>>> {STAGE_NAME} started <<<<<<")
+      obj = ModelEvaluationPipeline()
       obj.main()
       logger.info(f">>>>>> {STAGE_NAME} completed <<<<<<")
 except Exception as e:

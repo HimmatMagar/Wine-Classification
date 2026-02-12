@@ -1,24 +1,24 @@
 from src.wineModel import logger
-from src.wineModel.components.data_validation import DataValidation
+from src.wineModel.components.model_evaluation import ModelEvaluation
 from src.wineModel.config import ConfigurationManager
 
 
-STAGE_NAME = "Data Validation stage"
+STAGE_NAME = "Model Evaluation stage"
 
-class DataValidationTrainingPipeline():
+class ModelEvaluationPipeline():
       def __init__(self):
             pass
 
       def main(self):
             config = ConfigurationManager()
-            data_validation_config = config.get_data_validation_config()
-            data_validation = DataValidation(config=data_validation_config)
-            data_validation.validate_column()
+            model_evaluation_config = config.get_model_evaluation_config()
+            model_eval = ModelEvaluation(config=model_evaluation_config)
+            model_eval.test_model()
             
 if __name__ == "__main__":
       try:
             logger.info(f">>>>>> {STAGE_NAME} started <<<<<<")
-            obj = DataValidationTrainingPipeline()
+            obj = ModelEvaluationPipeline()
             obj.main()
             logger.info(f">>>>>> {STAGE_NAME} completed <<<<<<")
       except Exception as e:
