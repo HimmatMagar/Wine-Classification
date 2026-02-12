@@ -1,6 +1,6 @@
 from src.wineModel.utils import *
 from src.wineModel.constants import *
-from src.wineModel.entity.configuration import DataIngestionConfig
+from src.wineModel.entity.configuration import DataIngestionConfig, DataValidationConfig
 
 class ConfigurationManager:
       def __init__(
@@ -28,3 +28,16 @@ class ConfigurationManager:
             )
             return data_ingestion_config
       
+      def get_data_validation_config(self) -> DataValidationConfig:
+            config = self.config.data_validation
+            schema = self.schema.COLUMNS
+
+            create_directory([config.root_dir])
+
+            get_data_validation = DataValidationConfig(
+                  root_dir=config.root_dir,
+                  unzip_data_file=config.unzip_data_dir,
+                  status_file=config.STATUS_FILE,
+                  schema=schema
+            )
+            return get_data_validation

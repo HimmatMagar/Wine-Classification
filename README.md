@@ -1,4 +1,5 @@
 # Wine-Classification
+###### Wine Classification is an end-to-end machine learning project that predicts wine types based on their chemical properties. In this project, I implemented the Elastic Net algorithm to train the model, achieving a balance between Ridge and Lasso regression techniques for optimal performance.
 
 
 ### Project workflows
