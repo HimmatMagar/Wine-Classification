@@ -10,5 +10,6 @@ python-box
 ensure
 pyYAML
 notebook
+joblib
 
 -e .

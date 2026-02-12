@@ -3,7 +3,7 @@ from src.wineModel import logger
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
-from src.wineModel.entity.configuration import DataTransformationConfig
+from src.wineModel.entity import DataTransformationConfig
 
 
 class DataTransformation:

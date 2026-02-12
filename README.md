@@ -51,3 +51,7 @@ pip install -r requirements.txt
 - schema.yaml: Used to store the column name of the datasets
 - setup.py: Used to setup the project
 - template.py: Used to make a folder structure automatically
+- artificate/data_ingestion: This folder contain the data that are retrive from out sourcing
+- artificate/data_transformation: This folder contain the train and test file which are prepared using feature engeneering
+- artificate/data_validation: This folder contain status.txt that check the column
+- artificate/model_trainer: This folder contain actual ML model

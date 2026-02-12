@@ -1,5 +1,5 @@
 import pandas as pd
-from src.wineModel.entity.configuration import DataValidationConfig
+from src.wineModel.entity import DataValidationConfig
 
 class DataValidation:
       def __init__(self, config: DataValidationConfig):

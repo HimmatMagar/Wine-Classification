@@ -2,7 +2,7 @@ import os
 import zipfile
 import urllib.request as r
 from src.wineModel import logger
-from src.wineModel.entity.configuration import DataIngestionConfig
+from src.wineModel.entity import DataIngestionConfig
 
 
 class DataIngestion:

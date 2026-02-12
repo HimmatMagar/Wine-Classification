@@ -1,6 +1,6 @@
 from src.wineModel.utils import *
 from src.wineModel.constants import *
-from src.wineModel.entity.configuration import DataIngestionConfig, DataValidationConfig, DataTransformationConfig
+from src.wineModel.entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig, ModelTrainingConfig
 
 class ConfigurationManager:
       def __init__(
@@ -14,6 +14,7 @@ class ConfigurationManager:
             self.schema = read_yaml(schema_filepath)
 
             create_directory([self.config.artifacts_root])
+            
       
       def get_data_ingestion_config(self) -> DataIngestionConfig:
             config = self.config.data_ingestion
@@ -27,6 +28,7 @@ class ConfigurationManager:
                   unzip_file=config.unzip_dir
             )
             return data_ingestion_config
+      
       
       def get_data_validation_config(self) -> DataValidationConfig:
             config = self.config.data_validation
@@ -42,6 +44,7 @@ class ConfigurationManager:
             )
             return get_data_validation
       
+      
       def get_data_transformation_config(self) -> DataTransformationConfig:
             config = self.config.data_transformation
 
@@ -53,3 +56,22 @@ class ConfigurationManager:
             )
 
             return get_data_transformation
+      
+
+      def get_model_training_config(self) -> ModelTrainingConfig:
+            config = self.config.model_trainer
+            params = self.params.ElasticNet
+            schema = self.schema.TARGET_COLUMN
+
+            create_directory([config.root_dir])
+
+            model_train_config = ModelTrainingConfig(
+                  root_dir = config.root_dir,
+                  train_data = config.train_data,
+                  test_data = config.test_data,
+                  model = config.model,
+                  alpha = params.alpha,
+                  l1_ration = params.l1_ratio,
+                  target_column = schema.name
+            )
+            return model_train_config
