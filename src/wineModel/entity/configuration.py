@@ -14,3 +14,8 @@ class DataValidationConfig:
       unzip_data_file: Path
       status_file: str
       schema: dict
+
+@dataclass(frozen=True)
+class DataTransformationConfig:
+      root_dir: Path
+      data_file: Path
