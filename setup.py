@@ -7,17 +7,17 @@ with open("README.md", 'r', encoding='UTF-8') as f:
 
 __version__ = '0.0.0'
 
-REPO_NAME = "Wine-Classification"
+REPO_NAME = "Wine-Quality-Prediction"
 AUTHOR_USER_NAME = "HimmatMagar"
 SRC_REPO = "wineModel"
 AUTHOR_EMAIL = "himmatmagar007@gmail.com"
 
 setup(
-      name="Wine Classification",
+      name="Wine Quality Prediction",
       version=__version__,
       author=AUTHOR_USER_NAME,
       author_email=AUTHOR_EMAIL,
-      description="End to End ML Wine Classification Project implementation",
+      description="End to End ML Wine quality prediction Project implementation",
       long_description=long_description,
       long_description_content_type='text/markdown',
       url=f"https://github.com/{AUTHOR_USER_NAME}/{REPO_NAME}",
