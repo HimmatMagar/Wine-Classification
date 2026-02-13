@@ -1,5 +1,5 @@
-# Wine-Quality
-###### Wine Quality is an end-to-end machine learning project that predicts wine quality based on their chemical properties. In this project, I implemented the Elastic Net algorithm to train the model, achieving a balance between Ridge and Lasso regression techniques for optimal performance.
+# Wine Quality Prediction
+###### Wine Quality prediction is an end-to-end machine learning project that predicts wine quality based on their chemical properties. In this project, I implemented the Random Forest Regressor algorithm to train the model, achieving a optimal performance.
 
 
 ### Project workflows
