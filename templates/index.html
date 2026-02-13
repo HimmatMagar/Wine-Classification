@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Wine Quality Predictor</title>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <style>
+            body {
+                  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                  min-height: 100vh;
+            }
+
+            .input-group {
+                  position: relative;
+            }
+
+            .input-group input,
+            .input-group select {
+                  transition: all 0.3s ease;
+            }
+
+            .input-group input:focus,
+            .input-group select:focus {
+                  transform: translateY(-2px);
+                  box-shadow: 0 4px 12px rgba(114, 47, 55, 0.15);
+            }
+
+            .wine-gradient {
+                  background: linear-gradient(135deg, #722f37 0%, #a0424f 100%);
+            }
+
+            .result-card {
+                  animation: slideIn 0.5s ease-out;
+            }
+
+            @keyframes slideIn {
+                  from {
+                        opacity: 0;
+                        transform: translateY(20px);
+                  }
+
+                  to {
+                        opacity: 1;
+                        transform: translateY(0);
+                  }
+            }
+
+            .quality-badge {
+                  display: inline-block;
+                  padding: 0.5rem 1.5rem;
+                  border-radius: 2rem;
+                  font-weight: bold;
+                  font-size: 1.25rem;
+            }
+
+            .quality-excellent {
+                  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                  color: white;
+            }
+
+            .quality-good {
+                  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+                  color: white;
+            }
+
+            .quality-average {
+                  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+                  color: white;
+            }
+
+            .quality-poor {
+                  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+                  color: white;
+            }
+      </style>
+</head>
+
+<body class="font-sans p-4 md:p-8">
+
+      <div class="max-w-6xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-8">
+                  <h1 class="text-5xl font-bold text-white mb-3 drop-shadow-lg">🍷 Vinno Predictor</h1>
+                  <p class="text-white text-lg opacity-90">AI-Powered Wine Quality Assessment</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+                  <!-- Form Header -->
+                  <div class="wine-gradient p-6 text-center">
+                        <h2 class="text-2xl font-bold text-white tracking-wide">Enter Wine Characteristics</h2>
+                        <p class="text-red-100 mt-1 text-sm">Fill in all parameters for accurate prediction</p>
+                  </div>
+
+                  <form id="predictionForm" class="p-8 space-y-8">
+
+                        <!-- Wine Type Selection -->
+                        <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-xl">
+                              <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                                    <span class="mr-2">🍇</span> Wine Type
+                              </h3>
+                              <div class="input-group">
+                                    <select name="wine_type"
+                                          class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none text-lg font-medium bg-white">
+                                          <option value="1">🔴 Red Wine</option>
+                                          <option value="0">⚪ White Wine</option>
+                                    </select>
+                              </div>
+                        </div>
+
+                        <!-- Alcohol Content -->
+                        <div class="bg-gradient-to-r from-blue-50 to-cyan-50 p-6 rounded-xl">
+                              <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                                    <span class="mr-2">🌡️</span> Alcohol Content
+                              </h3>
+                              <div class="input-group">
+                                    <label class="block text-sm font-semibold text-gray-600 mb-2">Alcohol % (8.0 -
+                                          15.0)</label>
+                                    <input type="number" name="alcohol" step="0.1" min="8" max="15" value="11.5"
+                                          class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-lg"
+                                          placeholder="e.g., 11.5" required>
+                              </div>
+                        </div>
+
+                        <!-- Acidity Profile -->
+                        <div class="bg-gradient-to-r from-yellow-50 to-orange-50 p-6 rounded-xl">
+                              <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                                    <span class="mr-2">🧪</span> Acidity Profile
+                              </h3>
+                              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div class="input-group">
+                                          <label class="block text-sm font-semibold text-gray-600 mb-2">Fixed Acidity
+                                                (g/L)</label>
+                                          <input type="number" name="fixed_acidity" step="0.1" value="7.0"
+                                                class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none"
+                                                placeholder="e.g., 7.0" required>
+                                    </div>
+                                    <div class="input-group">
+                                          <label class="block text-sm font-semibold text-gray-600 mb-2">Volatile Acidity
+                                                (g/L)</label>
+                                          <input type="number" name="volatile_acidity" step="0.01" value="0.3"
+                                                class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none"
+                                                placeholder="e.g., 0.30" required>
+                                    </div>
+                                    <div class="input-group">
+                                          <label class="block text-sm font-semibold text-gray-600 mb-2">Citric Acid
+                                                (g/L)</label>
+                                          <input type="number" name="citric_acid" step="0.01" value="0.30"
+                                                class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none"
+                                                placeholder="e.g., 0.30" required>
+                                    </div>
+                              </div>
+                        </div>
+
+                        <!-- Sugar and Salts -->
+                        <div class="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl">
+                              <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                                    <span class="mr-2">🧂</span> Sugar & Salts
+                              </h3>
+                              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div class="input-group">
+                                          <label class="block text-sm font-semibold text-gray-600 mb-2">Residual Sugar
+                                                (g/L)</label>
+                                          <input type="number" name="residual_sugar" step="0.1" value="2.0"
+                                                class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none"
+                                                placeholder="e.g., 2.0" required>
+                                    </div>
+                                    <div class="input-group">
+                                          <label class="block text-sm font-semibold text-gray-600 mb-2">Chlorides
+                                                (g/L)</label>
+                                          <input type="number" name="chlorides" step="0.001" value="0.05"
+                                                class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none"
+                                                placeholder="e.g., 0.050" required>
+                                    </div>
+                              </div>
+                        </div>
+
+                        <!-- Sulfur Dioxide -->
+                        <div class="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-xl">
+                              <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                                    <span class="mr-2">💨</span> Sulfur Dioxide Levels
+                              </h3>
+                              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div class="input-group">
+                                          <label class="block text-sm font-semibold text-gray-600 mb-2">Free SO₂
+                                                (mg/L)</label>
+                                          <input type="number" name="free_sulfur_dioxide" step="1" value="30"
+                                                class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                                                placeholder="e.g., 30" required>
+                                    </div>
+                                    <div class="input-group">
+                                          <label class="block text-sm font-semibold text-gray-600 mb-2">Total SO₂
+                                                (mg/L)</label>
+                                          <input type="number" name="total_sulfur_dioxide" step="1" value="100"
+                                                class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                                                placeholder="e.g., 100" required>
+                                    </div>
+                              </div>
+                        </div>
+
+                        <!-- Physical & Chemical Properties -->
+                        <div class="bg-gradient-to-r from-pink-50 to-rose-50 p-6 rounded-xl">
+                              <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                                    <span class="mr-2">⚗️</span> Physical & Chemical Properties
+                              </h3>
+                              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div class="input-group">
+                                          <label class="block text-sm font-semibold text-gray-600 mb-2">Density
+                                                (g/cm³)</label>
+                                          <input type="number" name="density" step="0.0001" value="0.9950"
+                                                class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none"
+                                                placeholder="e.g., 0.9950" required>
+                                    </div>
+                                    <div class="input-group">
+                                          <label class="block text-sm font-semibold text-gray-600 mb-2">pH Level</label>
+                                          <input type="number" name="pH" step="0.01" value="3.20"
+                                                class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none"
+                                                placeholder="e.g., 3.20" required>
+                                    </div>
+                                    <div class="input-group">
+                                          <label class="block text-sm font-semibold text-gray-600 mb-2">Sulphates
+                                                (g/L)</label>
+                                          <input type="number" name="sulphates" step="0.01" value="0.60"
+                                                class="w-full p-4 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none"
+                                                placeholder="e.g., 0.60" required>
+                                    </div>
+                              </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit"
+                              class="w-full wine-gradient text-white font-bold py-5 rounded-xl shadow-lg transition-all transform hover:scale-105 hover:shadow-2xl text-lg">
+                              🔮 Predict Wine Quality
+                        </button>
+                  </form>
+
+                  <!-- Result Display -->
+                  <div id="resultContainer" class="hidden p-8 border-t-4 border-purple-300">
+                        <div class="result-card text-center">
+                              <h3 class="text-2xl font-bold text-gray-800 mb-4">Prediction Result</h3>
+                              <div id="qualityDisplay" class="mb-4"></div>
+                              <p class="text-gray-600 text-sm">Based on the chemical profile and characteristics
+                                    provided</p>
+                        </div>
+                  </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="text-center mt-8 text-white opacity-75">
+                  <p class="text-sm">Powered by Machine Learning • Vinno Predictor v2.0</p>
+            </div>
+      </div>
+
+      <script>
+            document.getElementById('predictionForm').addEventListener('submit', async function (e) {
+                  e.preventDefault();
+
+                  // Collect form data
+                  const formData = new FormData(e.target);
+                  const data = {};
+                  formData.forEach((value, key) => {
+                        data[key] = parseFloat(value);
+                  });
+
+                  // Show loading state
+                  const submitBtn = e.target.querySelector('button[type="submit"]');
+                  const originalText = submitBtn.innerHTML;
+                  submitBtn.innerHTML = 'Analyzing...';
+                  submitBtn.disabled = true;
+
+                  try {
+                        // Make API call (replace with your actual endpoint)
+                        const response = await fetch("http://127.0.0.1:8000/predict", {
+                              method: "POST",
+                              headers: {
+                                    "Content-Type": "application/json"
+                              },
+                              body: JSON.stringify(data)
+                        });
+
+                        if (!response.ok) {
+                              throw new Error('Network response was not ok');
+                        }
+
+                        const result = await response.json();
+
+                        // Display result
+                        displayResult(result.quality || result.prediction);
+
+                  } catch (error) {
+                        console.error('Error:', error);
+                        alert('Unable to connect to the prediction server. Please ensure the backend is running at http://127.0.0.1:8000');
+                  } finally {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                  }
+            });
+
+            function displayResult(quality) {
+                  const resultContainer = document.getElementById('resultContainer');
+                  const qualityDisplay = document.getElementById('qualityDisplay');
+
+                  let qualityClass = '';
+                  let qualityText = '';
+                  let emoji = '';
+
+                  // Determine quality rating
+                  if (quality >= 7) {
+                        qualityClass = 'quality-excellent';
+                        qualityText = 'Excellent';
+                        emoji = '🌟';
+                  } else if (quality >= 6) {
+                        qualityClass = 'quality-good';
+                        qualityText = 'Good';
+                        emoji = '👍';
+                  } else if (quality >= 5) {
+                        qualityClass = 'quality-average';
+                        qualityText = 'Average';
+                        emoji = '✓';
+                  } else {
+                        qualityClass = 'quality-poor';
+                        qualityText = 'Below Average';
+                        emoji = '⚠️';
+                  }
+
+                  qualityDisplay.innerHTML = `
+                        <div class="quality-badge ${qualityClass}">
+                              ${emoji} Quality Score: ${quality}/10
+                        </div>
+                        <p class="text-2xl font-bold text-gray-700 mt-4">Rating: ${qualityText}</p>
+                  `;
+
+                  resultContainer.classList.remove('hidden');
+                  resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+
+            // Optional: Add tooltips or help text
+            const inputs = document.querySelectorAll('input[type="number"]');
+            inputs.forEach(input => {
+                  input.addEventListener('focus', function () {
+                        this.parentElement.classList.add('ring-2');
+                  });
+                  input.addEventListener('blur', function () {
+                        this.parentElement.classList.remove('ring-2');
+                  });
+            });
+      </script>
+
+</body>
+
+</html>

@@ -27,8 +27,10 @@ class ModelTrainingConfig:
       train_data: Path
       test_data: Path
       model: str
-      alpha: float
-      l1_ration: float
+      n_estimators: int
+      min_samples_split: int
+      min_samples_leaf: int
+      max_features: str
       target_column: str
 
 
