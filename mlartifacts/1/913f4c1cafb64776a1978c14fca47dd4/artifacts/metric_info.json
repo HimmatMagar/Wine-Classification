@@ -1,0 +1,4 @@
+{
+  "LinearRegression_score-2_x_val_scale": "LinearRegression.score(X=x_val_scale, y=y_val)",
+  "LinearRegression_score_x_train_scale": "LinearRegression.score(X=x_train_scale, y=y_train)"
+}

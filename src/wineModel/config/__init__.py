@@ -81,18 +81,15 @@ class ConfigurationManager:
 
       def get_model_evaluation_config(self) -> ModelEvaluationConfig:
             config = self.config.model_evaluation
-            params = self.params.RandomForest
-            schema = self.schema.TARGET_COLUMN
 
             create_directory([config.root_dir])
 
             model_eval = ModelEvaluationConfig(
                   root_dir = config.root_dir,
-                  test_data = config.test_data,
+                  xval_file = config.xval_data,
+                  yval_file = config.yval_data,
                   model_path = config.model_path,
-                  all_params = params,
                   metric_file_name = config.metric_file_name,
-                  target_column = schema.name
             )
 
             return model_eval

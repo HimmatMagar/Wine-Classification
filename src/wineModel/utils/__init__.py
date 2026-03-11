@@ -1,6 +1,7 @@
 import os
 import yaml
 import json
+import joblib
 from typing import List
 from pathlib import Path
 from src.wineModel import logger
@@ -45,3 +46,16 @@ def load_json(path: Path):
 
       logger.info(f"json file loaded successfully from: {path}")
       return ConfigBox(content)
+
+
+@ensure_annotations
+def load_file(file_path: Path):
+      try:
+            with open(file_path, 'rb') as f:
+                  data = joblib.load(f)
+                  logger.info(f"Pickle file {file_path} loaded successfully")
+                  return data
+      except BoxValueError:
+            raise ValueError("Pickle file is empty")
+      except Exception as e:
+            raise e

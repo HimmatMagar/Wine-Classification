@@ -37,8 +37,7 @@ class ModelTrainingConfig:
 @dataclass(frozen=True)
 class ModelEvaluationConfig:
       root_dir: Path
-      test_data: Path
+      xval_file: Path
+      yval_file: Path
       model_path: Path
-      all_params: dict
       metric_file_name: Path
-      target_column: str

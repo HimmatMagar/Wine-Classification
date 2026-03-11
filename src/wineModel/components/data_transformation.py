@@ -1,6 +1,7 @@
 import os
-from src.wineModel import logger
+import joblib
 import pandas as pd
+from src.wineModel import logger
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from src.wineModel.entity import DataTransformationConfig
@@ -13,26 +14,19 @@ class DataTransformation:
       
       def scaled_data(self):
             df = pd.read_csv(self.config.data_file)
+
             x = df.drop(columns="quality")
             y = df['quality']
-            scaler = StandardScaler()
-            x_scale = scaler.fit_transform(x)
 
-            x_scaled_df = pd.DataFrame(x_scale, columns=x.columns)
-            y_df = pd.DataFrame(y, columns=['quality'])
-
-            return x_scaled_df, y_df
-      
-      def train_test_split(self):
-            x, y = self.scaled_data()
             x_train, x_val, y_train, y_val = train_test_split(x, y, test_size = 0.25, random_state=42)
 
-            train = pd.concat([x_train, y_train], axis=1)
-            test = pd.concat([x_val, y_val], axis=1)
-            
-            train.to_csv(os.path.join(self.config.root_dir, "train.csv"), index=False)
-            test.to_csv(os.path.join(self.config.root_dir, "test.csv"), index=False)
+            scaler = StandardScaler()
+            x_train_scale = scaler.fit_transform(x_train)
+            x_val_scale = scaler.transform(x_val)
+
+            joblib.dump(x_train_scale, os.path.join(self.config.root_dir, 'x_train.pkl'))
+            joblib.dump(x_val_scale, os.path.join(self.config.root_dir, 'x_val.pkl'))
+            joblib.dump(y_train, os.path.join(self.config.root_dir, 'y_train.pkl'))
+            joblib.dump(y_val, os.path.join(self.config.root_dir, 'y_val.pkl'))
 
             logger.info("Splitted data into train test split")
-            logger.info(train.shape)
-            logger.info(test.shape)

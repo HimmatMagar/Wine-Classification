@@ -1,7 +1,5 @@
 import os
 import joblib
-import numpy as np
-import pandas as pd
 from pathlib import Path
 from src.wineModel.utils import *
 from src.wineModel.entity import ModelEvaluationConfig
@@ -20,11 +18,10 @@ class ModelEvaluation:
             return mae, mse, r2
 
       def test_model(self):
-            test_data = pd.read_csv(self.config.test_data)
-            model = joblib.load(self.config.model_path)
+            x_val = load_file(Path(self.config.xval_file))
+            y_val = load_file(Path(self.config.yval_file))
 
-            x_val = test_data.drop(columns='quality')
-            y_val = test_data[['quality']]
+            model = joblib.load(self.config.model_path)
 
             y_pred = model.predict(x_val)
 

@@ -13,7 +13,7 @@ class DataTransformationTrainingPipeline():
             config = ConfigurationManager()
             data_transformation_config = config.get_data_transformation_config()
             data_transformation = DataTransformation(config=data_transformation_config)
-            data_transformation.train_test_split()
+            data_transformation.scaled_data()
             
 if __name__ == "__main__":
       try:

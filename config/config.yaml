@@ -17,12 +17,13 @@ data_transformation:
 
 model_trainer:
   root_dir: artifacts/model_trainer
-  train_data: artifacts/data_transformation/train.csv
-  test_data: artifacts/data_transformation/test.csv
+  train_data: artifacts/data_transformation/x_train.pkl
+  test_data: artifacts/data_transformation/y_train.pkl
   model: model.joblib
 
 model_evaluation:
   root_dir: artifacts/model_evluation
-  test_data: artifacts/data_transformation/test.csv
+  xval_data: artifacts/data_transformation/x_val.pkl
+  yval_data: artifacts/data_transformation/y_val.pkl
   model_path: artifacts/model_trainer/model.joblib
   metric_file_name: artifacts/model_evluation/metrics.json

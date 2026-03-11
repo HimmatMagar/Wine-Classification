@@ -11,5 +11,8 @@ ensure
 pyYAML
 notebook
 joblib
+mlflow
+dvc
+dagshub
 
 -e .
