@@ -1,6 +1,6 @@
-from src.wineModel.utils import *
-from src.wineModel.constants import *
-from src.wineModel.entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig, ModelTrainingConfig, ModelEvaluationConfig
+from wineModel.utils import *
+from wineModel.constants import *
+from wineModel.entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig, ModelTrainingConfig, ModelEvaluationConfig
 
 class ConfigurationManager:
       def __init__(

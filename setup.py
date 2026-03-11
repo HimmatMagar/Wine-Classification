@@ -13,7 +13,7 @@ SRC_REPO = "wineModel"
 AUTHOR_EMAIL = "himmatmagar007@gmail.com"
 
 setup(
-      name="Wine Quality Prediction",
+      name="wineModel",
       version=__version__,
       author=AUTHOR_USER_NAME,
       author_email=AUTHOR_EMAIL,

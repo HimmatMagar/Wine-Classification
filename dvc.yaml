@@ -1,0 +1,61 @@
+stages: 
+  data_ingestion:
+    cmd: python src/wineModel/pipeline/data_ingestion_pipeline.py
+    deps:
+      - src/wineModel/components/data_ingestion.py
+      - config/config.yaml
+    outs:
+      - artifacts/data_ingestion/wine-quality.csv
+
+
+  data_validation:
+    cmd: python src/wineModel/pipeline/data_validation_pipeline.py
+    deps:
+      - src/wineModel/components/data_validation.py
+      - artifacts/data_ingestion/wine-quality.csv
+      - config/config.yaml
+    outs:
+      - artifacts/data_validation/status.txt
+
+
+  data_transformation:
+    cmd: python src/wineModel/pipeline/data_transformation_pipeline.py
+    deps:
+      - src/wineModel/components/data_transformation.py
+      - artifacts/data_ingestion/wine-quality.csv
+      - config/config.yaml
+    outs:
+      - artifacts/data_transformation/x_train.pkl
+      - artifacts/data_transformation/x_val.pkl
+      - artifacts/data_transformation/y_train.pkl
+      - artifacts/data_transformation/y_val.pkl
+
+
+  model_training:
+    cmd: python src/wineModel/pipeline/model_training_pipeline.py
+    deps: 
+      - src/wineModel/components/model_training.py
+      - config/config.yaml
+      - artifacts/data_transformation/x_train.pkl
+      - artifacts/data_transformation/y_train.pkl
+    params:
+      - params.yaml:
+          - RandomForest.n_estimators
+          - RandomForest.min_samples_split
+          - RandomForest.min_samples_leaf
+          - RandomForest.max_features
+    outs:
+      - artifacts/model_trainer/model.joblib
+  
+
+  model_evaluation:
+    cmd: python src/wineModel/pipeline/model_evaluation_pipeline.py
+    deps:
+      - src/wineModel/components/model_evaluation.py
+      - artifacts/data_transformation/x_val.pkl
+      - artifacts/data_transformation/y_val.pkl
+      - artifacts/model_trainer/model.joblib
+      - config/config.yaml
+    metrics:
+      - artifacts/model_evaluation/metrics.json:
+          cache: false

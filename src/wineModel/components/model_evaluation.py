@@ -1,8 +1,8 @@
 import os
 import joblib
 from pathlib import Path
-from src.wineModel.utils import *
-from src.wineModel.entity import ModelEvaluationConfig
+from wineModel.utils import *
+from wineModel.entity import ModelEvaluationConfig
 from sklearn.metrics import mean_absolute_error, r2_score, mean_squared_error
 
 

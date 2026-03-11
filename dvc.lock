@@ -1,0 +1,128 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/wineModel/pipeline/data_ingestion_pipeline.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: e1c25a62f5b4ffc743d5dd04118efb27
+      size: 1040
+    - path: src/wineModel/components/data_ingestion.py
+      hash: md5
+      md5: 78e10780214483277cbe1fc9dfd7b98e
+      size: 966
+    outs:
+    - path: artifacts/data_ingestion/wine-quality.csv
+      hash: md5
+      md5: 53343e890990d867dccc52ff6d5e1699
+      size: 367724
+  data_validation:
+    cmd: python src/wineModel/pipeline/data_validation_pipeline.py
+    deps:
+    - path: artifacts/data_ingestion/wine-quality.csv
+      hash: md5
+      md5: 53343e890990d867dccc52ff6d5e1699
+      size: 367724
+    - path: config/config.yaml
+      hash: md5
+      md5: e1c25a62f5b4ffc743d5dd04118efb27
+      size: 1040
+    - path: src/wineModel/components/data_validation.py
+      hash: md5
+      md5: 2c750df4c063dd4f46ed35820ad44cc8
+      size: 1104
+    outs:
+    - path: artifacts/data_validation/status.txt
+      hash: md5
+      md5: 86e6a2f694c57a675b3e2da6b95ff9ba
+      size: 23
+  data_transformation:
+    cmd: python src/wineModel/pipeline/data_transformation_pipeline.py
+    deps:
+    - path: artifacts/data_ingestion/wine-quality.csv
+      hash: md5
+      md5: 53343e890990d867dccc52ff6d5e1699
+      size: 367724
+    - path: config/config.yaml
+      hash: md5
+      md5: e1c25a62f5b4ffc743d5dd04118efb27
+      size: 1040
+    - path: src/wineModel/components/data_transformation.py
+      hash: md5
+      md5: f6e45b8a9fb18c68740ab2a470dfa188
+      size: 1199
+    outs:
+    - path: artifacts/data_transformation/x_train.pkl
+      hash: md5
+      md5: ad7ca82b67e45e8869c10b32acc182bb
+      size: 467953
+    - path: artifacts/data_transformation/x_val.pkl
+      hash: md5
+      md5: 3e0e656bc18258a7ff25b1bdc65720e6
+      size: 156241
+    - path: artifacts/data_transformation/y_train.pkl
+      hash: md5
+      md5: 83728b82064571a4ebec8f20cabd54d4
+      size: 156706
+    - path: artifacts/data_transformation/y_val.pkl
+      hash: md5
+      md5: 2bc38a70b014aab311ae02187dbd52cc
+      size: 52810
+  model_training:
+    cmd: python src/wineModel/pipeline/model_training_pipeline.py
+    deps:
+    - path: artifacts/data_transformation/x_train.pkl
+      hash: md5
+      md5: ad7ca82b67e45e8869c10b32acc182bb
+      size: 467953
+    - path: artifacts/data_transformation/y_train.pkl
+      hash: md5
+      md5: 83728b82064571a4ebec8f20cabd54d4
+      size: 156706
+    - path: config/config.yaml
+      hash: md5
+      md5: e1c25a62f5b4ffc743d5dd04118efb27
+      size: 1040
+    - path: src/wineModel/components/model_training.py
+      hash: md5
+      md5: 00c994cc9db747e224592c0f2e8b57ff
+      size: 1663
+    params:
+      params.yaml:
+        RandomForest.max_features: log2
+        RandomForest.min_samples_leaf: 1
+        RandomForest.min_samples_split: 2
+        RandomForest.n_estimators: 100
+    outs:
+    - path: artifacts/model_trainer/model.joblib
+      hash: md5
+      md5: 4b24c3af781e30c7f59f7feb738a119f
+      size: 17634465
+  model_evaluation:
+    cmd: python src/wineModel/pipeline/model_evaluation_pipeline.py
+    deps:
+    - path: artifacts/data_transformation/x_val.pkl
+      hash: md5
+      md5: 3e0e656bc18258a7ff25b1bdc65720e6
+      size: 156241
+    - path: artifacts/data_transformation/y_val.pkl
+      hash: md5
+      md5: 2bc38a70b014aab311ae02187dbd52cc
+      size: 52810
+    - path: artifacts/model_trainer/model.joblib
+      hash: md5
+      md5: 4b24c3af781e30c7f59f7feb738a119f
+      size: 17634465
+    - path: config/config.yaml
+      hash: md5
+      md5: e1c25a62f5b4ffc743d5dd04118efb27
+      size: 1040
+    - path: src/wineModel/components/model_evaluation.py
+      hash: md5
+      md5: 55a0c7146335180caa93b3529502924b
+      size: 1096
+    outs:
+    - path: artifacts/model_evaluation/metrics.json
+      hash: md5
+      md5: d07edfe7432bf8bf6d2da159c71faee2
+      size: 105

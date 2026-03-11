@@ -1,6 +1,6 @@
-from src.wineModel import logger
-from src.wineModel.components.data_validation import DataValidation
-from src.wineModel.config import ConfigurationManager
+from wineModel import logger
+from wineModel.components.data_validation import DataValidation
+from wineModel.config import ConfigurationManager
 
 
 STAGE_NAME = "Data Validation stage"

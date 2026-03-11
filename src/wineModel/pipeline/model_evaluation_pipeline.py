@@ -1,6 +1,6 @@
-from src.wineModel import logger
-from src.wineModel.components.model_evaluation import ModelEvaluation
-from src.wineModel.config import ConfigurationManager
+from wineModel import logger
+from wineModel.components.model_evaluation import ModelEvaluation
+from wineModel.config import ConfigurationManager
 
 
 STAGE_NAME = "Model Evaluation stage"

@@ -1,6 +1,6 @@
-from src.wineModel import logger
-from src.wineModel.components.model_training import ModelTrainig
-from src.wineModel.config import ConfigurationManager
+from wineModel import logger
+from wineModel.components.model_training import ModelTrainig
+from wineModel.config import ConfigurationManager
 
 
 STAGE_NAME = "Model Training stage"

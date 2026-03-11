@@ -22,8 +22,8 @@ model_trainer:
   model: model.joblib
 
 model_evaluation:
-  root_dir: artifacts/model_evluation
+  root_dir: artifacts/model_evaluation
   xval_data: artifacts/data_transformation/x_val.pkl
   yval_data: artifacts/data_transformation/y_val.pkl
   model_path: artifacts/model_trainer/model.joblib
-  metric_file_name: artifacts/model_evluation/metrics.json
+  metric_file_name: artifacts/model_evaluation/metrics.json

@@ -1,6 +1,6 @@
-from src.wineModel import logger
-from src.wineModel.components.data_ingestion import DataIngestion
-from src.wineModel.config import ConfigurationManager
+from wineModel import logger
+from wineModel.components.data_ingestion import DataIngestion
+from wineModel.config import ConfigurationManager
 
 
 STAGE_NAME = "Data Ingestion stage"

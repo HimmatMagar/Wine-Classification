@@ -4,7 +4,7 @@ import json
 import joblib
 from typing import List
 from pathlib import Path
-from src.wineModel import logger
+from wineModel import logger
 from box.config_box import ConfigBox
 from ensure import ensure_annotations
 from box.exceptions import BoxValueError
