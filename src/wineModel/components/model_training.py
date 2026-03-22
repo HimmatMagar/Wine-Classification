@@ -22,20 +22,8 @@ class ModelTrainig:
                   max_features = self.config.max_features
             )
 
-            model.fit(x_train, y_train)
-
-            # mlflow.set_experiment("Wine quality model")
-            # mlflow.set_tracking_uri("http://127.0.0.1:5000/")
-
-            # with mlflow.start_run(run_name="RandomF-Model"):
-            #       mlflow.log_params({
-            #             "n_estimators": self.config.n_estimators,
-            #             "min_samples_split": self.config.min_samples_split,
-            #             "min_samples_leaf": self.config.min_samples_leaf,
-            #             "max_features": self.config.max_features
-            #       })
-                  
-            #       mlflow.sklearn.log_model(model, "model")
-            
+            model.fit(x_train, y_train)   
             joblib.dump(model, os.path.join(self.config.root_dir, self.config.model))
             logger.info("Model saved & logged to MLflow")
+            
+            return model

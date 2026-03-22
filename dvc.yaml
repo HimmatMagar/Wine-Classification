@@ -46,6 +46,8 @@ stages:
           - RandomForest.max_features
     outs:
       - artifacts/model_trainer/model.joblib
+      - artifacts/run_id.txt
+      - artifacts/model_id.txt
   
 
   model_evaluation:

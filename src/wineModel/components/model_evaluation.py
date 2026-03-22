@@ -30,7 +30,8 @@ class ModelEvaluation:
             scoring = {
                   "MAE": mae,
                   "MSE": mse,
-                  'R2 score': r2
+                  'R2_score': r2
             }
 
             save_json(path=Path(self.config.metric_file_name), data=scoring)
+            return scoring

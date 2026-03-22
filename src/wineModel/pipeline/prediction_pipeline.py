@@ -1,12 +1,12 @@
-import joblib
-import numpy as np
-import pandas as pd
+import mlflow
 from pathlib import Path
 
 
 class PredictionPipeline:
       def __init__(self):
-            self.model = joblib.load(Path('artifacts/model_trainer/model.joblib'))
+            self.model = mlflow.pyfunc.load_model(
+                  "models:/Wine-Quality-Model/Production"
+            )
       
       def prediction(self, data):
             prediction = self.model.predict(data)
