@@ -85,8 +85,8 @@ stages:
       size: 1040
     - path: src/wineModel/components/model_training.py
       hash: md5
-      md5: 00c994cc9db747e224592c0f2e8b57ff
-      size: 1663
+      md5: 7e70ac44ce9b64f47c85e05f375fb589
+      size: 1060
     params:
       params.yaml:
         RandomForest.max_features: log2
@@ -94,10 +94,18 @@ stages:
         RandomForest.min_samples_split: 2
         RandomForest.n_estimators: 100
     outs:
+    - path: artifacts/model_id.txt
+      hash: md5
+      md5: f9a3ebe5118473834a08576b3e2b0b93
+      size: 34
     - path: artifacts/model_trainer/model.joblib
       hash: md5
-      md5: 4b24c3af781e30c7f59f7feb738a119f
-      size: 17634465
+      md5: 8903b1713f43fb9177cedbf731e2cc2e
+      size: 17703441
+    - path: artifacts/run_id.txt
+      hash: md5
+      md5: 06b76b0112a08445c49bdab19562328e
+      size: 32
   model_evaluation:
     cmd: python src/wineModel/pipeline/model_evaluation_pipeline.py
     deps:
@@ -111,18 +119,18 @@ stages:
       size: 52810
     - path: artifacts/model_trainer/model.joblib
       hash: md5
-      md5: 4b24c3af781e30c7f59f7feb738a119f
-      size: 17634465
+      md5: 8903b1713f43fb9177cedbf731e2cc2e
+      size: 17703441
     - path: config/config.yaml
       hash: md5
       md5: e1c25a62f5b4ffc743d5dd04118efb27
       size: 1040
     - path: src/wineModel/components/model_evaluation.py
       hash: md5
-      md5: 55a0c7146335180caa93b3529502924b
-      size: 1096
+      md5: 621b02d50bcf28c33c7984133e58f916
+      size: 1124
     outs:
     - path: artifacts/model_evaluation/metrics.json
       hash: md5
-      md5: d07edfe7432bf8bf6d2da159c71faee2
-      size: 105
+      md5: 0acae3328683cdd2107128778cb535d6
+      size: 106
